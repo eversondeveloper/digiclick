@@ -30,7 +30,38 @@ export const ClickpowStyled = styled.div`
   width: 80%;
   overflow: hidden;
   position: relative;
-  animation: animage 8s ease-in-out infinite;
+}
+
+.telainicial{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  background-color: #0000009d;
+  background-image: url("/backinic1.png");
+}
+
+.rockettexto{
+  width: 50%;
+  position: absolute;
+  top: 0%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rockettexto img{
+  height: 40%;
+  position: absolute;
+}
+
+.rockettexto img:nth-child(1){
+  height: 90%;
 }
 
 .rocketcaiu{
@@ -62,30 +93,6 @@ export const ClickpowStyled = styled.div`
   }
   100% {
     transform: scale(1);
-  }
-}
-
-@keyframes animage {
-  0% {
-    background-size: 100%;
-    transform: translate(0px, 0px) rotate(0deg);
-  }
-  20% {
-    transform: translate(-1px, 1px) rotate(-0.2deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(0.2deg);
-  }
-  60% {
-    background-size: 105%;
-    transform: translate(-1.5px, 0.5px) rotate(-0.3deg);
-  }
-  80% {
-    transform: translate(1.5px, -1px) rotate(0.3deg);
-  }
-  100% {
-    background-size: 100%;
-    transform: translate(0px, 0px) rotate(0deg);
   }
 }
 

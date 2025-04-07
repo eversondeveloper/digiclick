@@ -43,6 +43,7 @@ export default function Rocket(props) {
     if (rocketSomCaiu.current) {
       rocketSomCaiu.current.currentTime = 0;
       rocketSomCaiu.current.play();
+      rocketSomCaiu.current.volume = 0.5;
     }
   }
 
