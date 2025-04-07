@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, use } from "react";
 import { RocketStyled } from "./RocketStyled";
 
 export default function Rocket(props) {
@@ -22,6 +22,7 @@ export default function Rocket(props) {
 
   const rocketSomExplosionRef = useRef(new Audio("/explosao.mp3"));
   const rocketSomDisparoRef = useRef(new Audio("/disparado.mp3"));
+  const rocketSomCaiu = useRef(new Audio("/explosaocaiu.mp3"));
 
   const somExplosao1 = () => {
     if (rocketSomExplosionRef.current) {
@@ -34,10 +35,17 @@ export default function Rocket(props) {
     if (rocketSomDisparoRef.current) {
       rocketSomDisparoRef.current.currentTime = 0;
       rocketSomDisparoRef.current.play();
+
     }
   };
 
-  // Evento no fim da animação
+  const somCaiu = () => {
+    if (rocketSomCaiu.current) {
+      rocketSomCaiu.current.currentTime = 0;
+      rocketSomCaiu.current.play();
+    }
+  }
+
   useEffect(() => {
     const rocketAnin = rocketAninRef.current;
 
@@ -46,10 +54,12 @@ export default function Rocket(props) {
       const larguraAnterior = dimensaoRocket;
       const ajuste = (novaLargura - larguraAnterior) / 2;
 
+      props.setPow(true);
+      somCaiu()
       setImageRocket(imgExplosao2);
       setDimensaoRocket(novaLargura);
-      setPosicaoRocket(70); // pode ser ajustado se necessário
-      setRocketPosicao((prev) => Math.max(0, prev - ajuste)); // centralizar
+      setPosicaoRocket(70); 
+      setRocketPosicao((prev) => Math.max(0, prev - ajuste));
     };
 
     if (rocketAnin) {
@@ -63,7 +73,6 @@ export default function Rocket(props) {
     };
   }, [dimensaoRocket]);
 
-  // Quando o foguete é destruído
   const funcRocket = () => {
     setImageRocket(imageExplosion);
     setTimeout(() => {
@@ -72,9 +81,8 @@ export default function Rocket(props) {
     }, 700);
   };
 
-  // Reposição e reinício após destruição
   useEffect(() => {
-    if (animar === false) {
+    if (animar === false ) {
       setTimeout(() => {
         rocketSomDisparoRef.current.pause();
         rocketSomDisparoRef.current.currentTime = 0;
@@ -89,7 +97,12 @@ export default function Rocket(props) {
     }
   }, [animar, larguraContainer]);
 
-  // Definir posição aleatória inicial
+  useEffect(() => {
+    if (!props.pow){
+      setAnimar(false);
+    }
+  },[props.pow])
+
   useEffect(() => {
     setRocketPosicao(Math.floor(Math.random() * (larguraContainer - dimensaoRocket)));
   }, [larguraContainer]);

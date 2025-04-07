@@ -1,4 +1,4 @@
-import Card1 from "../../Components/cards/card1";
+import Card1 from "../../Components/cards/Card1";
 import { iconFoguete, iconTeclado } from "../../Components/imageicons";
 import { HomeStyled } from "./HomeStyled";
 

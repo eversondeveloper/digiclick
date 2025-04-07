@@ -10,6 +10,7 @@ export default function Clickpow() {
   const [quantRockets, setQuantRockets] = useState(0);
   const [quantClicks, setQuantClicks] = useState(0);
   const [quantClicksUteis, setQuantClicksUteis] = useState(0);
+  const [pow, setPow] = useState(false);
 
   useEffect(() => {
     setQuantClicksUteis(quantRocketsDest * 2)
@@ -33,6 +34,8 @@ export default function Clickpow() {
     document.title = "Clickpow";
   }, []);
 
+  
+
   return (
     <DefaultPagsStyled>
       <div className="main">
@@ -50,6 +53,11 @@ export default function Clickpow() {
             }}
             ref={tamanhoAreaRef}
           >
+            {pow && (
+               <div className="rocketcaiu">
+               <img src="/public/pow1.png" alt="Pow!" onClick={()=>{setPow(false)}} />
+             </div>)
+             }
             {tamanhoArea.width > 0 && (
               <Rocket
                 tamanhoArea={tamanhoArea}
@@ -63,6 +71,8 @@ export default function Clickpow() {
                 quantRockets={quantRockets}
                 quantClicks={quantClicks}
                 quantClicksUteis={quantClicksUteis}
+                pow={pow}
+                setPow={setPow}
               />
             )}
           </div>

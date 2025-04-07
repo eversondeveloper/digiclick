@@ -33,6 +33,38 @@ export const ClickpowStyled = styled.div`
   animation: animage 8s ease-in-out infinite;
 }
 
+.rocketcaiu{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background-color: #00000096;
+  user-select: none;
+}
+
+.rocketcaiu img{
+  width: 40%;
+  animation: pow 5s ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes pow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @keyframes animage {
   0% {
     background-size: 100%;
