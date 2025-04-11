@@ -9,23 +9,23 @@ export const RocketStyled = styled.div`
   width: ${(props) => props.$dimensaoRocket}px;
   left: ${(props) => props.$rocketPosicao}px;
   animation: ${(props) =>
-    props.$animar
-      ? "rocketanimation 10s cubic-bezier(0, 1, 1, .5) forwards"
-      : "none"};
+    props.$animar ? "rocketanimation forwards" : "none"};
   user-select: none;
+  animation-duration: ${(props) => props.velocidadeRocket}s;
+  cursor: pointer;
+  z-index: 5;
 
   @keyframes rocketanimation {
-    /* 25% {
-      top: 25%;
+    3% {
+      top: 35%;
     }
+
     50% {
-      top: 50%;
+      top: 65%;
     }
-    75% {
-      top: 75%;
-    } */
-    100% {
-      top: ${(props) => props.$posicaoRocket}%;
+
+    100%{
+      top: 73%;
     }
   }
 
@@ -38,7 +38,6 @@ export const RocketStyled = styled.div`
   }
 
   .rocket img {
-    
     width: 100%;
   }
 `;

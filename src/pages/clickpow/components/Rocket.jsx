@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, use } from "react";
+import { useRef, useEffect, useState } from "react";
 import { RocketStyled } from "./RocketStyled";
 
 export default function Rocket(props) {
@@ -17,7 +17,7 @@ export default function Rocket(props) {
   const rocketRef = useRef(null);
   const rocketAninRef = useRef(null);
 
-  const alturaContainer = props.tamanhoArea.height;
+  // const alturaContainer = props.tamanhoArea.height;
   const larguraContainer = props.tamanhoArea.width;
 
   const rocketSomExplosionRef = useRef(new Audio("/explosao.mp3"));
@@ -35,7 +35,6 @@ export default function Rocket(props) {
     if (rocketSomDisparoRef.current) {
       rocketSomDisparoRef.current.currentTime = 0;
       rocketSomDisparoRef.current.play();
-
     }
   };
 
@@ -43,23 +42,24 @@ export default function Rocket(props) {
     if (rocketSomCaiu.current) {
       rocketSomCaiu.current.currentTime = 0;
       rocketSomCaiu.current.play();
-      rocketSomCaiu.current.volume = 0.5;
+      rocketSomCaiu.current.volume = 0.2;
     }
-  }
+  };
 
   useEffect(() => {
     const rocketAnin = rocketAninRef.current;
 
     const mensagem = () => {
-      const novaLargura = 200;
+      const novaLargura = 400;
       const larguraAnterior = dimensaoRocket;
       const ajuste = (novaLargura - larguraAnterior) / 2;
 
       props.setPow(true);
-      somCaiu()
+      props.setVidas(prev => prev > 0 && (prev - 1))
+      somCaiu();
       setImageRocket(imgExplosao2);
       setDimensaoRocket(novaLargura);
-      setPosicaoRocket(70); 
+      setPosicaoRocket(70);
       setRocketPosicao((prev) => Math.max(0, prev - ajuste));
     };
 
@@ -83,7 +83,7 @@ export default function Rocket(props) {
   };
 
   useEffect(() => {
-    if (animar === false ) {
+    if (animar === false) {
       setTimeout(() => {
         rocketSomDisparoRef.current.pause();
         rocketSomDisparoRef.current.currentTime = 0;
@@ -99,13 +99,15 @@ export default function Rocket(props) {
   }, [animar, larguraContainer]);
 
   useEffect(() => {
-    if (!props.pow){
+    if (!props.pow) {
       setAnimar(false);
     }
-  },[props.pow])
+  }, [props.pow]);
 
   useEffect(() => {
-    setRocketPosicao(Math.floor(Math.random() * (larguraContainer - dimensaoRocket)));
+    setRocketPosicao(
+      Math.floor(Math.random() * (larguraContainer - dimensaoRocket))
+    );
   }, [larguraContainer]);
 
   return (
@@ -115,6 +117,7 @@ export default function Rocket(props) {
       $rocketPosicao={rocketPosicao}
       $dimensaoRocket={dimensaoRocket}
       $posicaoRocket={posicaoRocket}
+      velocidadeRocket={props.velocidadeRocket}
     >
       <div
         className="rocket"
